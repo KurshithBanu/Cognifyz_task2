@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            padding: 10px;
+            border: 1px solid #b6afaf;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            width: 90%;
+            padding: 7px;
+            margin-top:5px;
+            margin-bottom:15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #58b85b;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #253826;
+        }
+        .error {
+            color: rgb(250, 58, 58);
+        }
+        .gender-group {
+            display: flex;
+            align-items: center;
+        }
+        .gender-group label {
+            margin: 0;
+        }
+    </style>
+    <script> // client side form validation
+        function validateForm() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
+
+            if (!name || !email || !phone) {
+                errorMessage.textContent = "All required fields must be filled!";
+                return false;
+            }
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                errorMessage.textContent = "Invalid email format!";
+                return false;
+            }
+            if (!/^\d{10}$/.test(phone)) {
+                errorMessage.textContent = "Phone number must be 10 digits!";
+                return false;
+            return true;
+        }
+    }
+    </script>
+</head>
+<body>
+    <form action="/submit" method="POST" onsubmit="return validateForm();">
+        <h1>Fill the Details!</h1>
+        <div id="error-message" class="error"></div>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Ph No:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label>Gender:</label>
+        <div class="gender-group">
+            <input type="radio" id="male" name="gender" value="Male" required>
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required>
+            <label for="female">Female</label>
+        </div>
+        <br>
+
+        <label for="nationality">Nationality:</label>
+        <select id="nationality" name="nationality" required>
+            <option value="Indian">Indian</option>
+            <option value="American">American</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="comments">Comments (Optional):</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Additional comments.."></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
