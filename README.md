@@ -1,4 +1,4 @@
-This project includes the Form but with css styling, client and server side validation and temporary data storage
+This project includes the Form with css styling, client and server side validation and temporary data storage
 
 Things i done in this project:
 Extend HTML with more complex forms and user interactions.
